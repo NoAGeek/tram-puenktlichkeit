@@ -1,0 +1,1166 @@
+{
+  "data": {
+    "monitors": [
+      {
+        "locationStop": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              16.3773387,
+              48.2390154
+            ]
+          },
+          "properties": {
+            "name": "60200569",
+            "title": "Höchstädtplatz",
+            "municipality": "Wien",
+            "municipalityId": 49000001,
+            "type": "stop",
+            "coordName": "WGS84",
+            "attributes": {
+              "rbl": 319
+            }
+          }
+        },
+        "lines": [
+          {
+            "name": "12",
+            "towards": "Josefstädter Straße U",
+            "direction": "H",
+            "platform": "1",
+            "richtungsId": "1",
+            "barrierFree": true,
+            "realtimeSupported": true,
+            "trafficjam": false,
+            "departures": {
+              "departure": [
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:53:30.000+0100",
+                    "timeReal": "2026-10-28T13:53:57.000+0100",
+                    "countdown": 8
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:03:30.000+0100",
+                    "timeReal": "2026-10-28T14:03:30.000+0100",
+                    "countdown": 17
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:13:30.000+0100",
+                    "timeReal": "2026-10-28T14:13:30.000+0100",
+                    "countdown": 27
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:23:30.000+0100",
+                    "timeReal": "2026-10-28T14:23:30.000+0100",
+                    "countdown": 37
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:33:30.000+0100",
+                    "timeReal": "2026-10-28T14:33:30.000+0100",
+                    "countdown": 47
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:43:30.000+0100",
+                    "timeReal": "2026-10-28T14:43:30.000+0100",
+                    "countdown": 57
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:53:30.000+0100",
+                    "timeReal": "2026-10-28T14:53:30.000+0100",
+                    "countdown": 67
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                }
+              ]
+            },
+            "type": "ptTram",
+            "lineId": 112
+          }
+        ],
+        "attributes": {}
+      },
+      {
+        "locationStop": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              16.3773387,
+              48.2390154
+            ]
+          },
+          "properties": {
+            "name": "60200569",
+            "title": "Höchstädtplatz",
+            "municipality": "Wien",
+            "municipalityId": 49000001,
+            "type": "stop",
+            "coordName": "WGS84",
+            "attributes": {
+              "rbl": 319
+            }
+          }
+        },
+        "lines": [
+          {
+            "name": "2",
+            "towards": "Friedrich-Engels-Platz",
+            "direction": "H",
+            "platform": "1",
+            "richtungsId": "1",
+            "barrierFree": true,
+            "realtimeSupported": true,
+            "trafficjam": false,
+            "departures": {
+              "departure": [
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:50:00.000+0100",
+                    "timeReal": "2026-10-28T13:50:09.000+0100",
+                    "countdown": 4
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:57:30.000+0100",
+                    "timeReal": "2026-10-28T14:02:54.000+0100",
+                    "countdown": 17
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:05:00.000+0100",
+                    "timeReal": "2026-10-28T14:06:23.000+0100",
+                    "countdown": 20
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:12:30.000+0100",
+                    "timeReal": "2026-10-28T14:12:30.000+0100",
+                    "countdown": 26
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:20:00.000+0100",
+                    "timeReal": "2026-10-28T14:20:00.000+0100",
+                    "countdown": 34
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:27:30.000+0100",
+                    "timeReal": "2026-10-28T14:27:30.000+0100",
+                    "countdown": 41
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:35:00.000+0100",
+                    "timeReal": "2026-10-28T14:35:00.000+0100",
+                    "countdown": 49
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:42:30.000+0100",
+                    "timeReal": "2026-10-28T14:42:30.000+0100",
+                    "countdown": 56
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:50:00.000+0100",
+                    "timeReal": "2026-10-28T14:50:00.000+0100",
+                    "countdown": 64
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                }
+              ]
+            },
+            "type": "ptTram",
+            "lineId": 102
+          }
+        ],
+        "attributes": {}
+      },
+      {
+        "locationStop": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              16.3770602,
+              48.2396676
+            ]
+          },
+          "properties": {
+            "name": "60200569",
+            "title": "Höchstädtplatz",
+            "municipality": "Wien",
+            "municipalityId": 49000001,
+            "type": "stop",
+            "coordName": "WGS84",
+            "attributes": {
+              "rbl": 322
+            }
+          }
+        },
+        "lines": [
+          {
+            "name": "2",
+            "towards": "Dornbach",
+            "direction": "R",
+            "platform": "2",
+            "richtungsId": "2",
+            "barrierFree": true,
+            "realtimeSupported": true,
+            "trafficjam": false,
+            "departures": {
+              "departure": [
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:49:30.000+0100",
+                    "timeReal": "2026-10-28T13:49:30.000+0100",
+                    "countdown": 3
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Dornbach",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:57:00.000+0100",
+                    "timeReal": "2026-10-28T13:57:00.000+0100",
+                    "countdown": 11
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Dornbach",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:04:30.000+0100",
+                    "timeReal": "2026-10-28T14:04:30.000+0100",
+                    "countdown": 18
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Dornbach",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:12:00.000+0100",
+                    "timeReal": "2026-10-28T14:12:00.000+0100",
+                    "countdown": 26
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Dornbach",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:19:30.000+0100",
+                    "timeReal": "2026-10-28T14:19:30.000+0100",
+                    "countdown": 33
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Dornbach",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:27:00.000+0100",
+                    "timeReal": "2026-10-28T14:27:00.000+0100",
+                    "countdown": 41
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Dornbach",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:34:30.000+0100",
+                    "timeReal": "2026-10-28T14:34:30.000+0100",
+                    "countdown": 48
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Dornbach",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:41:00.000+0100",
+                    "timeReal": "2026-10-28T14:41:00.000+0100",
+                    "countdown": 55
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Dornbach",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:48:30.000+0100",
+                    "timeReal": "2026-10-28T14:48:30.000+0100",
+                    "countdown": 62
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Dornbach",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                }
+              ]
+            },
+            "type": "ptTram",
+            "lineId": 102
+          }
+        ],
+        "attributes": {}
+      },
+      {
+        "locationStop": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              16.3770602,
+              48.2396676
+            ]
+          },
+          "properties": {
+            "name": "60200569",
+            "title": "Höchstädtplatz",
+            "municipality": "Wien",
+            "municipalityId": 49000001,
+            "type": "stop",
+            "coordName": "WGS84",
+            "attributes": {
+              "rbl": 322
+            }
+          }
+        },
+        "lines": [
+          {
+            "name": "31",
+            "towards": "Schottenring U",
+            "direction": "R",
+            "platform": "2",
+            "richtungsId": "2",
+            "barrierFree": true,
+            "realtimeSupported": true,
+            "trafficjam": false,
+            "departures": {
+              "departure": [
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:47:00.000+0100",
+                    "timeReal": "2026-10-28T13:46:34.000+0100",
+                    "countdown": 0
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:54:30.000+0100",
+                    "timeReal": "2026-10-28T13:53:47.000+0100",
+                    "countdown": 7
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:02:00.000+0100",
+                    "timeReal": "2026-10-28T14:03:00.000+0100",
+                    "countdown": 17
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:09:30.000+0100",
+                    "timeReal": "2026-10-28T14:08:35.000+0100",
+                    "countdown": 22
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:17:00.000+0100",
+                    "timeReal": "2026-10-28T14:17:00.000+0100",
+                    "countdown": 31
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:24:30.000+0100",
+                    "timeReal": "2026-10-28T14:24:30.000+0100",
+                    "countdown": 38
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:32:00.000+0100",
+                    "timeReal": "2026-10-28T14:32:00.000+0100",
+                    "countdown": 46
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:39:30.000+0100",
+                    "timeReal": "2026-10-28T14:39:30.000+0100",
+                    "countdown": 53
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:47:00.000+0100",
+                    "timeReal": "2026-10-28T14:47:00.000+0100",
+                    "countdown": 61
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:54:30.000+0100",
+                    "timeReal": "2026-10-28T14:54:30.000+0100",
+                    "countdown": 68
+                  },
+                  "vehicle": {
+                    "name": "31",
+                    "towards": "Schottenring U",
+                    "direction": "R",
+                    "platform": "2",
+                    "richtungsId": "2",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 131
+                  }
+                }
+              ]
+            },
+            "type": "ptTram",
+            "lineId": 131
+          }
+        ],
+        "attributes": {}
+      },
+      {
+        "locationStop": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              16.3713828,
+              48.230094
+            ]
+          },
+          "properties": {
+            "name": "60201443",
+            "title": "Wallensteinplatz",
+            "municipality": "Wien",
+            "municipalityId": 49000001,
+            "type": "stop",
+            "coordName": "WGS84",
+            "attributes": {
+              "rbl": 350
+            }
+          }
+        },
+        "lines": [
+          {
+            "name": "5",
+            "towards": "Westbahnhof S U",
+            "direction": "H",
+            "platform": "1",
+            "richtungsId": "1",
+            "barrierFree": true,
+            "realtimeSupported": true,
+            "trafficjam": false,
+            "departures": {
+              "departure": [
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:47:30.000+0100",
+                    "timeReal": "2026-10-28T13:48:42.000+0100",
+                    "countdown": 2
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:55:00.000+0100",
+                    "timeReal": "2026-10-28T13:54:05.000+0100",
+                    "countdown": 8
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:02:30.000+0100",
+                    "timeReal": "2026-10-28T14:02:30.000+0100",
+                    "countdown": 16
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:09:50.000+0100",
+                    "timeReal": "2026-10-28T14:09:50.000+0100",
+                    "countdown": 23
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:16:30.000+0100",
+                    "timeReal": "2026-10-28T14:16:30.000+0100",
+                    "countdown": 30
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:23:10.000+0100",
+                    "timeReal": "2026-10-28T14:23:10.000+0100",
+                    "countdown": 37
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:29:50.000+0100",
+                    "timeReal": "2026-10-28T14:29:50.000+0100",
+                    "countdown": 43
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:36:30.000+0100",
+                    "timeReal": "2026-10-28T14:36:30.000+0100",
+                    "countdown": 50
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:43:10.000+0100",
+                    "timeReal": "2026-10-28T14:43:10.000+0100",
+                    "countdown": 57
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:49:50.000+0100",
+                    "timeReal": "2026-10-28T14:49:50.000+0100",
+                    "countdown": 63
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                }
+              ]
+            },
+            "type": "ptTram",
+            "lineId": 105
+          }
+        ],
+        "attributes": {}
+      }
+    ]
+  },
+  "message": {
+    "value": "OK",
+    "messageCode": 1,
+    "serverTime": "2026-10-28T13:45:52.000+0100"
+  }
+}

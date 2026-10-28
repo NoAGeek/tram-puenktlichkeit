@@ -1,0 +1,53 @@
+# Konfiguration für das Straßenbahn-Pünktlichkeitsprojekt.
+# Hier ändern statt im Code!
+
+# Wie oft die API abgefragt wird (Sekunden)
+poll_interval_seconds = 60
+
+# Wie lange wir maximal auf eine Antwort der API warten (Sekunden)
+request_timeout_seconds = 10
+
+# Ab mehr als so vielen Sekunden Verspätung gilt eine Fahrt als verspätet.
+# Verfrühte Fahrten (negative Verspätung) gelten als pünktlich.
+delay_threshold_seconds = 180
+
+# Echtzeit-Abfahrtsmonitor der Wiener Linien (Open Data, kein API-Key nötig)
+api_url = "https://www.wienerlinien.at/ogd_realtime/monitor"
+
+# Wo Datenbank, Log und Diagramme landen (relativ zum Projektordner)
+database_path = "data/tramcheck.db"
+log_path = "data/collector.log"
+chart_dir = "data/charts"
+
+# Die gemessenen Linien. Alle Richtung Stadtzentrum.
+# stop_id = Bahnsteig-Nummer (RBL) aus wienerlinien-ogd-haltepunkte.csv
+# direction = Feld "direction" in der API ("H" = Hinweg, "R" = Rückweg)
+# Achtung: Linie 33 wurde eingestellt und darf nicht verwendet werden.
+
+[[lines]]
+line = "2"
+stop_id = 322
+stop_name = "Höchstädtplatz"
+direction = "R"
+towards = "Dornbach"
+
+[[lines]]
+line = "31"
+stop_id = 322
+stop_name = "Höchstädtplatz"
+direction = "R"
+towards = "Schottenring U"
+
+[[lines]]
+line = "12"
+stop_id = 319
+stop_name = "Höchstädtplatz"
+direction = "H"
+towards = "Josefstädter Straße U"
+
+[[lines]]
+line = "5"
+stop_id = 350
+stop_name = "Wallensteinplatz"
+direction = "H"
+towards = "Westbahnhof S U"

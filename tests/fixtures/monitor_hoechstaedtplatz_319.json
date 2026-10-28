@@ -1,0 +1,431 @@
+{
+  "data": {
+    "monitors": [
+      {
+        "locationStop": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              16.3773387,
+              48.2390154
+            ]
+          },
+          "properties": {
+            "name": "60200569",
+            "title": "Höchstädtplatz",
+            "municipality": "Wien",
+            "municipalityId": 49000001,
+            "type": "stop",
+            "coordName": "WGS84",
+            "attributes": {
+              "rbl": 319
+            }
+          }
+        },
+        "lines": [
+          {
+            "name": "12",
+            "towards": "Josefstädter Straße U",
+            "direction": "H",
+            "platform": "1",
+            "richtungsId": "1",
+            "barrierFree": true,
+            "realtimeSupported": true,
+            "trafficjam": false,
+            "departures": {
+              "departure": [
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:53:30.000+0100",
+                    "timeReal": "2026-10-28T13:54:02.000+0100",
+                    "countdown": 8
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:03:30.000+0100",
+                    "timeReal": "2026-10-28T14:03:30.000+0100",
+                    "countdown": 18
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:13:30.000+0100",
+                    "timeReal": "2026-10-28T14:13:30.000+0100",
+                    "countdown": 28
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:23:30.000+0100",
+                    "timeReal": "2026-10-28T14:23:30.000+0100",
+                    "countdown": 38
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:33:30.000+0100",
+                    "timeReal": "2026-10-28T14:33:30.000+0100",
+                    "countdown": 48
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:43:30.000+0100",
+                    "timeReal": "2026-10-28T14:43:30.000+0100",
+                    "countdown": 58
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:53:30.000+0100",
+                    "timeReal": "2026-10-28T14:53:30.000+0100",
+                    "countdown": 68
+                  },
+                  "vehicle": {
+                    "name": "12",
+                    "towards": "Josefstädter Straße U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 112
+                  }
+                }
+              ]
+            },
+            "type": "ptTram",
+            "lineId": 112
+          }
+        ],
+        "attributes": {}
+      },
+      {
+        "locationStop": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              16.3773387,
+              48.2390154
+            ]
+          },
+          "properties": {
+            "name": "60200569",
+            "title": "Höchstädtplatz",
+            "municipality": "Wien",
+            "municipalityId": 49000001,
+            "type": "stop",
+            "coordName": "WGS84",
+            "attributes": {
+              "rbl": 319
+            }
+          }
+        },
+        "lines": [
+          {
+            "name": "2",
+            "towards": "Friedrich-Engels-Platz",
+            "direction": "H",
+            "platform": "1",
+            "richtungsId": "1",
+            "barrierFree": true,
+            "realtimeSupported": true,
+            "trafficjam": false,
+            "departures": {
+              "departure": [
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:50:00.000+0100",
+                    "timeReal": "2026-10-28T13:50:19.000+0100",
+                    "countdown": 4
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:57:30.000+0100",
+                    "timeReal": "2026-10-28T14:02:39.000+0100",
+                    "countdown": 17
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:05:00.000+0100",
+                    "timeReal": "2026-10-28T14:06:27.000+0100",
+                    "countdown": 21
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:12:30.000+0100",
+                    "timeReal": "2026-10-28T14:12:30.000+0100",
+                    "countdown": 27
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:20:00.000+0100",
+                    "timeReal": "2026-10-28T14:20:00.000+0100",
+                    "countdown": 34
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:27:30.000+0100",
+                    "timeReal": "2026-10-28T14:27:40.000+0100",
+                    "countdown": 42
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:35:00.000+0100",
+                    "timeReal": "2026-10-28T14:35:00.000+0100",
+                    "countdown": 49
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:42:30.000+0100",
+                    "timeReal": "2026-10-28T14:42:30.000+0100",
+                    "countdown": 57
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:50:00.000+0100",
+                    "timeReal": "2026-10-28T14:50:00.000+0100",
+                    "countdown": 64
+                  },
+                  "vehicle": {
+                    "name": "2",
+                    "towards": "Friedrich-Engels-Platz",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 102
+                  }
+                }
+              ]
+            },
+            "type": "ptTram",
+            "lineId": 102
+          }
+        ],
+        "attributes": {}
+      }
+    ]
+  },
+  "message": {
+    "value": "OK",
+    "messageCode": 1,
+    "serverTime": "2026-10-28T13:45:27.000+0100"
+  }
+}

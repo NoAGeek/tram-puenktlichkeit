@@ -1,0 +1,10 @@
+# Virtuelle Umgebung
+.venv/
+
+# Python-Cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Gesammelte Daten, Logs und Diagramme (zu groß / ändern sich ständig)
+data/

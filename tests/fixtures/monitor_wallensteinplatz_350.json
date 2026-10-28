@@ -1,0 +1,263 @@
+{
+  "data": {
+    "monitors": [
+      {
+        "locationStop": {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              16.3713828,
+              48.230094
+            ]
+          },
+          "properties": {
+            "name": "60201443",
+            "title": "Wallensteinplatz",
+            "municipality": "Wien",
+            "municipalityId": 49000001,
+            "type": "stop",
+            "coordName": "WGS84",
+            "attributes": {
+              "rbl": 350
+            }
+          }
+        },
+        "lines": [
+          {
+            "name": "5",
+            "towards": "Westbahnhof S U",
+            "direction": "H",
+            "platform": "1",
+            "richtungsId": "1",
+            "barrierFree": true,
+            "realtimeSupported": true,
+            "trafficjam": false,
+            "departures": {
+              "departure": [
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:47:30.000+0100",
+                    "timeReal": "2026-10-28T13:48:40.000+0100",
+                    "countdown": 3
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T13:55:00.000+0100",
+                    "timeReal": "2026-10-28T13:55:00.000+0100",
+                    "countdown": 9
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:02:30.000+0100",
+                    "timeReal": "2026-10-28T14:02:30.000+0100",
+                    "countdown": 17
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:09:50.000+0100",
+                    "timeReal": "2026-10-28T14:09:50.000+0100",
+                    "countdown": 24
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:16:30.000+0100",
+                    "timeReal": "2026-10-28T14:16:30.000+0100",
+                    "countdown": 31
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:23:10.000+0100",
+                    "timeReal": "2026-10-28T14:23:10.000+0100",
+                    "countdown": 37
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:29:50.000+0100",
+                    "timeReal": "2026-10-28T14:29:50.000+0100",
+                    "countdown": 44
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:36:30.000+0100",
+                    "timeReal": "2026-10-28T14:36:30.000+0100",
+                    "countdown": 51
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:43:10.000+0100",
+                    "timeReal": "2026-10-28T14:43:10.000+0100",
+                    "countdown": 57
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": false,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                },
+                {
+                  "departureTime": {
+                    "timePlanned": "2026-10-28T14:49:50.000+0100",
+                    "timeReal": "2026-10-28T14:49:50.000+0100",
+                    "countdown": 64
+                  },
+                  "vehicle": {
+                    "name": "5",
+                    "towards": "Westbahnhof S U",
+                    "direction": "H",
+                    "platform": "1",
+                    "richtungsId": "1",
+                    "barrierFree": true,
+                    "cooling": true,
+                    "realtimeSupported": true,
+                    "trafficjam": false,
+                    "type": "ptTram",
+                    "attributes": {},
+                    "linienId": 105
+                  }
+                }
+              ]
+            },
+            "type": "ptTram",
+            "lineId": 105
+          }
+        ],
+        "attributes": {}
+      }
+    ]
+  },
+  "message": {
+    "value": "OK",
+    "messageCode": 1,
+    "serverTime": "2026-10-28T13:45:28.000+0100"
+  }
+}
