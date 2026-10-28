@@ -1,4 +1,4 @@
-"""Die Sammelschleife: fragt die API regelmäßig ab und speichert.  [Person A]
+"""Die Sammelschleife: fragt die API regelmäßig ab und speichert.  [Mo]
 
 Hier treffen die beiden Hälften zusammen:
 api_client -> parser -> storage.save_poll
@@ -49,7 +49,7 @@ def poll_once(config: Config, conn: sqlite3.Connection) -> int:
     Returns:
         Anzahl der gespeicherten Abfahrten (0 bei Fehler).
 
-    TODO (Person A):
+    TODO (Mo):
         1. ``fetched_at = now()``
         2. ``data = api_client.fetch_monitor(...)``
         3. Wenn ``not api_client.is_valid_response(data)``:
@@ -58,7 +58,7 @@ def poll_once(config: Config, conn: sqlite3.Connection) -> int:
            ``storage.save_poll(conn, fetched_at, True, departures)``
         5. Anzahl der Abfahrten zurückgeben und mit ``logger.info`` loggen
     """
-    raise NotImplementedError("TODO Person A: poll_once")
+    raise NotImplementedError("TODO Mo: poll_once")
 
 
 def run_forever(config: Config) -> None:
@@ -66,7 +66,7 @@ def run_forever(config: Config) -> None:
 
     Beenden mit Strg+C.
 
-    TODO (Person A):
+    TODO (Mo):
         - Datenbank öffnen: ``conn = storage.connect(config.database_path)``
         - ``while True:``-Schleife
         - Jeden Durchlauf in ``try: ... except Exception: logger.exception(...)``
@@ -74,4 +74,4 @@ def run_forever(config: Config) -> None:
         - ``KeyboardInterrupt`` (Strg+C) NICHT abfangen, damit man beenden kann
         - ``time.sleep(config.poll_interval_seconds)``
     """
-    raise NotImplementedError("TODO Person A: run_forever")
+    raise NotImplementedError("TODO Mo: run_forever")

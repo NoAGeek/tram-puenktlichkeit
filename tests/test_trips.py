@@ -1,4 +1,4 @@
-"""Tests für Person B: Verfolgung einer Fahrt über mehrere Abfragen.
+"""Tests für Omar: Verfolgung einer Fahrt über mehrere Abfragen.
 
 Braucht keine JSON-Dateien: die Departures werden mit make_departure von Hand gebaut.
 """

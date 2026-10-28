@@ -1,7 +1,7 @@
-"""Gemeinsame Datenklassen: die Schnittstelle zwischen Person A und Person B.
+"""Gemeinsame Datenklassen: die Schnittstelle zwischen Mo und Omar.
 
-Person A (Datenabruf) erzeugt ``Departure``-Objekte.
-Person B (Speicherung, Statistik) verarbeitet ``Departure``- und ``Trip``-Objekte.
+Mo (Datenabruf) erzeugt ``Departure``-Objekte.
+Omar (Speicherung, Statistik) verarbeitet ``Departure``- und ``Trip``-Objekte.
 
 Änderungen an dieser Datei bitte nur gemeinsam absprechen,
 sonst passt der Code der beiden Hälften nicht mehr zusammen.

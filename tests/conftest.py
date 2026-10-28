@@ -48,7 +48,7 @@ def make_departure(
     line: str = "2",
     realtime_supported: bool = True,
 ) -> Departure:
-    """Baut ein Departure von Hand: für Tests von Person B ohne API und JSON."""
+    """Baut ein Departure von Hand: für Tests von Omar ohne API und JSON."""
     return Departure(
         fetched_at=fetched_at,
         line=line,

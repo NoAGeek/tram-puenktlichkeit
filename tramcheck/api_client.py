@@ -1,4 +1,4 @@
-"""HTTP-Abruf vom Echtzeit-Monitor der Wiener Linien.  [Person A]
+"""HTTP-Abruf vom Echtzeit-Monitor der Wiener Linien.  [Mo]
 
 Wichtigste Regel: Dieses Modul wirft NIE eine Exception nach außen.
 Bei jedem Problem wird geloggt und ``None`` zurückgegeben, damit das
@@ -27,7 +27,7 @@ def fetch_monitor(api_url: str, stop_ids: list[int], timeout: int) -> dict | Non
     Returns:
         Das JSON als Python-``dict``, oder ``None`` bei einem Fehler.
 
-    TODO (Person A):
+    TODO (Mo):
         1. ``requests.get(...)`` mit ``params`` und ``timeout`` aufrufen
         2. ``response.raise_for_status()``: wirft Fehler bei HTTP 4xx/5xx
         3. ``response.json()`` zurückgeben
@@ -37,7 +37,7 @@ def fetch_monitor(api_url: str, stop_ids: list[int], timeout: int) -> dict | Non
            ``requests.RequestException`` (alles andere von requests),
            ``ValueError`` (Antwort war kein gültiges JSON)
     """
-    raise NotImplementedError("TODO Person A: fetch_monitor")
+    raise NotImplementedError("TODO Mo: fetch_monitor")
 
 
 def is_valid_response(data: dict | None) -> bool:
@@ -53,7 +53,7 @@ def is_valid_response(data: dict | None) -> bool:
         ``True`` nur wenn ``data`` nicht ``None`` ist, ``message.value``
         gleich ``"OK"`` ist und ``data.monitors`` nicht leer ist.
 
-    TODO (Person A): umsetzen. Tipp: ``data.get("data", {}).get("monitors", [])``
+    TODO (Mo): umsetzen. Tipp: ``data.get("data", {}).get("monitors", [])``
         stürzt nicht ab, wenn ein Schlüssel fehlt.
     """
-    raise NotImplementedError("TODO Person A: is_valid_response")
+    raise NotImplementedError("TODO Mo: is_valid_response")

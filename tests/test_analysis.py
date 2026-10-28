@@ -1,4 +1,4 @@
-"""Tests für Person B: Kennzahlen pro Linie."""
+"""Tests für Omar: Kennzahlen pro Linie."""
 
 import pytest
 

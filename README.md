@@ -49,15 +49,15 @@ Alle Einstellungen (Intervall, Schwellenwert, Linien) stehen in `config.toml`.
 
 ```
 tramcheck/
-  models.py      Departure + Trip: die Schnittstelle zwischen A und B  (gemeinsam)
+  models.py      Departure + Trip: Schnittstelle zwischen Mo und Omar  (gemeinsam)
   config.py      liest config.toml                                     (gemeinsam, fertig)
-  api_client.py  HTTP-Abfrage, fängt alle Fehler ab                    (Person A)
-  parser.py      JSON -> list[Departure]                               (Person A)
-  collector.py   Schleife: abfragen -> parsen -> speichern             (Person A)
-  storage.py     SQLite: polls, observations, trips                    (Person B)
-  trips.py       Beobachtungen -> Fahrten mit endgültiger Verspätung   (Person B)
-  analysis.py    Kennzahlen pro Linie                                  (Person B)
-  charts.py      matplotlib-Diagramme                                  (Person B)
+  api_client.py  HTTP-Abfrage, fängt alle Fehler ab                    (Mo)
+  parser.py      JSON -> list[Departure]                               (Mo)
+  collector.py   Schleife: abfragen -> parsen -> speichern             (Mo)
+  storage.py     SQLite: polls, observations, trips                    (Omar)
+  trips.py       Beobachtungen -> Fahrten mit endgültiger Verspätung   (Omar)
+  analysis.py    Kennzahlen pro Linie                                  (Omar)
+  charts.py      matplotlib-Diagramme                                  (Omar)
 tests/
   fixtures/      echte API-Antworten vom 28.10.2026 + Sonderfälle
 ```
@@ -71,6 +71,47 @@ API -> api_client -> parser -> list[Departure] -> storage (polls + observations)
                                                        |
                                   report:       analysis -> charts -> PNG
 ```
+
+## Wer macht was
+
+Die Grenze zwischen uns ist `models.py`: Mo liefert eine `list[Departure]`, Omar nimmt sie
+entgegen. Dadurch kann jeder für sich arbeiten und testen, ohne auf den anderen zu warten.
+
+### Mo: Datenabruf von der API
+
+| Datei | Funktion | Test (`@todo` löschen, wenn fertig) |
+|---|---|---|
+| `parser.py` | [ ] `is_wanted` | über `test_parse_monitor_*` |
+| `parser.py` | [ ] `parse_monitor` | `test_parser.py`: 5 Tests |
+| `api_client.py` | [ ] `is_valid_response` | `test_empty_response_is_not_valid` |
+| `api_client.py` | [ ] `fetch_monitor` | eigenen Test schreiben (mit `unittest.mock`) |
+| `collector.py` | [ ] `poll_once` | erst wenn `storage.save_poll` von Omar fertig ist |
+| `collector.py` | [ ] `run_forever` | per Hand: `python -m tramcheck collect` |
+
+Empfohlene Reihenfolge: `parser.py` zuerst (geht komplett mit den Fixtures, ohne Internet).
+
+### Omar: Speicherung, Statistik und Diagramme
+
+| Datei | Funktion | Test (`@todo` löschen, wenn fertig) |
+|---|---|---|
+| `trips.py` | [ ] `group_by_trip` | eigenen Test schreiben |
+| `trips.py` | [ ] `has_disappeared` | über `test_trip_is_unsure_*` |
+| `trips.py` | [ ] `build_trip` | `test_trips.py`: 4 Tests |
+| `trips.py` | [ ] `build_trips` | eigenen Test schreiben |
+| `storage.py` | [ ] `save_poll`, `load_observations`, `load_successful_poll_times` | `test_storage.py`: 2 Tests |
+| `storage.py` | [ ] `replace_trips`, `load_trips` | eigenen Test schreiben |
+| `analysis.py` | [ ] `compute_line_stats` | `test_line_stats_counts_only_ok_trips` |
+| `charts.py` | [ ] `plot_delayed_share`, `plot_delay_distribution` | per Hand: PNG anschauen |
+| `charts.py` | [ ] `plot_delay_by_hour` (optional) | per Hand |
+
+Empfohlene Reihenfolge: `trips.py` zuerst (das ist das fachliche Herzstück und geht ganz
+ohne Datenbank und API).
+
+### Gemeinsam
+
+- [ ] `models.py` und `config.toml` gemeinsam durchgehen, danach nur noch gemeinsam ändern
+- [ ] Sammeln starten, sobald Mos Teil und `storage.save_poll` fertig sind (je früher, desto mehr Daten!)
+- [ ] Am Ende: `build-trips` + `report` laufen lassen und Ergebnisse gemeinsam interpretieren
 
 ## Fachliche Regeln
 

@@ -1,4 +1,4 @@
-"""Kennzahlen pro Linie.  [Person B]
+"""Kennzahlen pro Linie.  [Omar]
 
 Nur Fahrten mit Status "ok" fließen in Anteil und Durchschnitt ein.
 Alle anderen werden extra gezählt und NIE als pünktlich gewertet.
@@ -51,9 +51,9 @@ def compute_line_stats(trips: list[Trip], threshold_seconds: int) -> dict[str, L
     Returns:
         ``dict`` Liniennummer -> ``LineStats``.
 
-    TODO (Person B):
+    TODO (Omar):
         1. Fahrten nach ``trip.line`` gruppieren
         2. Pro Linie zählen und rechnen (siehe Attribute von ``LineStats``)
         3. Für den Durchschnitt hilft ``statistics.mean`` aus der Standardbibliothek
     """
-    raise NotImplementedError("TODO Person B: compute_line_stats")
+    raise NotImplementedError("TODO Omar: compute_line_stats")
