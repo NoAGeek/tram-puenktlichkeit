@@ -8,3 +8,7 @@ __pycache__/
 
 # Gesammelte Daten, Logs und Diagramme (zu groß / ändern sich ständig)
 data/
+
+# Editor-Einstellungen (PyCharm, VS Code)
+.idea/
+.vscode/
