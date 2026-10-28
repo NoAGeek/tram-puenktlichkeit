@@ -1,4 +1,4 @@
-"""Speicherung in SQLite.  [Omar]
+"""Speicherung in SQLite.  [Mo]
 
 Das einzige Modul mit SQL. Alle anderen Module arbeiten nur mit
 ``Departure``- und ``Trip``-Objekten.
@@ -91,7 +91,7 @@ def save_poll(
     Returns:
         Die ``id`` der neuen Zeile in ``polls``.
 
-    TODO (Omar):
+    TODO (Mo):
         1. ``INSERT INTO polls ...``, die neue id steht danach in
            ``cursor.lastrowid``
         2. Für jede Departure ``INSERT INTO observations ...`` mit dieser poll_id
@@ -99,7 +99,7 @@ def save_poll(
         3. Immer ``?``-Platzhalter verwenden, nie f-Strings im SQL!
         4. ``conn.commit()`` am Ende
     """
-    raise NotImplementedError("TODO Omar: save_poll")
+    raise NotImplementedError("TODO Mo: save_poll")
 
 
 def load_successful_poll_times(conn: sqlite3.Connection) -> list[datetime]:
@@ -107,9 +107,9 @@ def load_successful_poll_times(conn: sqlite3.Connection) -> list[datetime]:
 
     Wird von ``trips.build_trips`` gebraucht, um Datenlücken zu erkennen.
 
-    TODO (Omar): ``SELECT fetched_at FROM polls WHERE success = 1 ORDER BY fetched_at``
+    TODO (Mo): ``SELECT fetched_at FROM polls WHERE success = 1 ORDER BY fetched_at``
     """
-    raise NotImplementedError("TODO Omar: load_successful_poll_times")
+    raise NotImplementedError("TODO Mo: load_successful_poll_times")
 
 
 def load_observations(conn: sqlite3.Connection) -> list[Departure]:
@@ -117,24 +117,24 @@ def load_observations(conn: sqlite3.Connection) -> list[Departure]:
 
     ``fetched_at`` kommt aus der Tabelle ``polls`` (JOIN über ``poll_id``).
 
-    TODO (Omar): SELECT mit JOIN, jede Zeile in ein ``Departure`` umbauen
+    TODO (Mo): SELECT mit JOIN, jede Zeile in ein ``Departure`` umbauen
         (Zeiten mit ``from_text``, ``realtime_supported`` mit ``bool(...)``).
     """
-    raise NotImplementedError("TODO Omar: load_observations")
+    raise NotImplementedError("TODO Mo: load_observations")
 
 
 def replace_trips(conn: sqlite3.Connection, trips: list[Trip]) -> None:
     """Löscht alle alten Fahrten und speichert die neu berechneten.
 
-    TODO (Omar): ``DELETE FROM trips``, dann alle ``trips`` einfügen,
+    TODO (Mo): ``DELETE FROM trips``, dann alle ``trips`` einfügen,
         dann ``conn.commit()``.
     """
-    raise NotImplementedError("TODO Omar: replace_trips")
+    raise NotImplementedError("TODO Mo: replace_trips")
 
 
 def load_trips(conn: sqlite3.Connection) -> list[Trip]:
     """Liest alle berechneten Fahrten als ``Trip``-Objekte.
 
-    TODO (Omar): umsetzen, analog zu ``load_observations``.
+    TODO (Mo): umsetzen, analog zu ``load_observations``.
     """
-    raise NotImplementedError("TODO Omar: load_trips")
+    raise NotImplementedError("TODO Mo: load_trips")

@@ -1,4 +1,4 @@
-"""Wandelt das JSON der API in ``Departure``-Objekte um.  [Mo]
+"""Wandelt das JSON der API in ``Departure``-Objekte um.  [Omar]
 
 Reine Funktionen ohne Netzwerk, darum leicht mit Fixtures zu testen.
 
@@ -37,10 +37,10 @@ def is_wanted(line: str, stop_id: int, direction: str, lines: list[LineConfig]) 
     Beispiel: An stopId 319 hält auch der 2er Richtung Friedrich-Engels-Platz,
     den wollen wir dort aber nicht.
 
-    TODO (Mo): ``True`` zurückgeben, wenn ein Eintrag in ``lines``
+    TODO (Omar): ``True`` zurückgeben, wenn ein Eintrag in ``lines``
         dieselbe ``line``, ``stop_id`` und ``direction`` hat.
     """
-    raise NotImplementedError("TODO Mo: is_wanted")
+    raise NotImplementedError("TODO Omar: is_wanted")
 
 
 def parse_monitor(data: dict, lines: list[LineConfig], fetched_at: datetime) -> list[Departure]:
@@ -54,7 +54,7 @@ def parse_monitor(data: dict, lines: list[LineConfig], fetched_at: datetime) -> 
     Returns:
         Liste von ``Departure``. Leere Liste, wenn nichts Passendes dabei ist.
 
-    TODO (Mo):
+    TODO (Omar):
         1. Über ``data["data"]["monitors"]`` gehen, pro Monitor die
            stop_id aus ``locationStop.properties.attributes.rbl`` lesen
         2. Darin über ``lines`` gehen, mit ``is_wanted`` filtern
@@ -66,4 +66,4 @@ def parse_monitor(data: dict, lines: list[LineConfig], fetched_at: datetime) -> 
            - ``realtime_supported`` aus ``vehicle``, falls vorhanden,
              sonst vom Linien-Eintrag
     """
-    raise NotImplementedError("TODO Mo: parse_monitor")
+    raise NotImplementedError("TODO Omar: parse_monitor")

@@ -1,4 +1,4 @@
-"""Tests für Omar: Kennzahlen pro Linie."""
+"""Tests für Mo: Kennzahlen pro Linie."""
 
 import pytest
 

@@ -1,4 +1,4 @@
-"""Tests für Omar: storage. Datenbank nur im Arbeitsspeicher (":memory:")."""
+"""Tests für Mo: storage. Datenbank nur im Arbeitsspeicher (":memory:")."""
 
 from conftest import make_departure, t, todo
 from tramcheck import storage

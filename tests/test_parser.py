@@ -1,4 +1,4 @@
-"""Tests für Mo: api_client und parser. Rufen NIE die echte API auf."""
+"""Tests für Omar: api_client und parser. Rufen NIE die echte API auf."""
 
 from datetime import timedelta
 

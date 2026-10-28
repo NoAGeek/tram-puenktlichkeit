@@ -49,15 +49,15 @@ Alle Einstellungen (Intervall, Schwellenwert, Linien) stehen in `config.toml`.
 
 ```
 tramcheck/
-  models.py      Departure + Trip: Schnittstelle zwischen Mo und Omar  (gemeinsam)
+  models.py      Departure + Trip: Schnittstelle zwischen Omar und Mo  (gemeinsam)
   config.py      liest config.toml                                     (gemeinsam, fertig)
-  api_client.py  HTTP-Abfrage, fängt alle Fehler ab                    (Mo)
-  parser.py      JSON -> list[Departure]                               (Mo)
-  collector.py   Schleife: abfragen -> parsen -> speichern             (Mo)
-  storage.py     SQLite: polls, observations, trips                    (Omar)
-  trips.py       Beobachtungen -> Fahrten mit endgültiger Verspätung   (Omar)
-  analysis.py    Kennzahlen pro Linie                                  (Omar)
-  charts.py      matplotlib-Diagramme                                  (Omar)
+  api_client.py  HTTP-Abfrage, fängt alle Fehler ab                    (Omar)
+  parser.py      JSON -> list[Departure]                               (Omar)
+  collector.py   Schleife: abfragen -> parsen -> speichern             (Omar)
+  storage.py     SQLite: polls, observations, trips                    (Mo)
+  trips.py       Beobachtungen -> Fahrten mit endgültiger Verspätung   (Mo)
+  analysis.py    Kennzahlen pro Linie                                  (Mo)
+  charts.py      matplotlib-Diagramme                                  (Mo)
 tests/
   fixtures/      echte API-Antworten vom 28.10.2026 + Sonderfälle
 ```
@@ -74,10 +74,10 @@ API -> api_client -> parser -> list[Departure] -> storage (polls + observations)
 
 ## Wer macht was
 
-Die Grenze zwischen uns ist `models.py`: Mo liefert eine `list[Departure]`, Omar nimmt sie
+Die Grenze zwischen uns ist `models.py`: Omar liefert eine `list[Departure]`, Mo nimmt sie
 entgegen. Dadurch kann jeder für sich arbeiten und testen, ohne auf den anderen zu warten.
 
-### Mo: Datenabruf von der API
+### Omar: Datenabruf von der API
 
 | Datei | Funktion | Test (`@todo` löschen, wenn fertig) |
 |---|---|---|
@@ -85,12 +85,12 @@ entgegen. Dadurch kann jeder für sich arbeiten und testen, ohne auf den anderen
 | `parser.py` | [ ] `parse_monitor` | `test_parser.py`: 5 Tests |
 | `api_client.py` | [ ] `is_valid_response` | `test_empty_response_is_not_valid` |
 | `api_client.py` | [ ] `fetch_monitor` | eigenen Test schreiben (mit `unittest.mock`) |
-| `collector.py` | [ ] `poll_once` | erst wenn `storage.save_poll` von Omar fertig ist |
+| `collector.py` | [ ] `poll_once` | erst wenn `storage.save_poll` von Mo fertig ist |
 | `collector.py` | [ ] `run_forever` | per Hand: `python -m tramcheck collect` |
 
 Empfohlene Reihenfolge: `parser.py` zuerst (geht komplett mit den Fixtures, ohne Internet).
 
-### Omar: Speicherung, Statistik und Diagramme
+### Mo: Speicherung, Statistik und Diagramme
 
 | Datei | Funktion | Test (`@todo` löschen, wenn fertig) |
 |---|---|---|
@@ -110,7 +110,7 @@ ohne Datenbank und API).
 ### Gemeinsam
 
 - [ ] `models.py` und `config.toml` gemeinsam durchgehen, danach nur noch gemeinsam ändern
-- [ ] Sammeln starten, sobald Mos Teil und `storage.save_poll` fertig sind (je früher, desto mehr Daten!)
+- [ ] Sammeln starten, sobald Omars Teil und `storage.save_poll` fertig sind (je früher, desto mehr Daten!)
 - [ ] Am Ende: `build-trips` + `report` laufen lassen und Ergebnisse gemeinsam interpretieren
 
 ## Fachliche Regeln

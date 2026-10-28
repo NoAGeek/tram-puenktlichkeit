@@ -1,7 +1,7 @@
-"""Gemeinsame Datenklassen: die Schnittstelle zwischen Mo und Omar.
+"""Gemeinsame Datenklassen: die Schnittstelle zwischen Omar und Mo.
 
-Mo (Datenabruf) erzeugt ``Departure``-Objekte.
-Omar (Speicherung, Statistik) verarbeitet ``Departure``- und ``Trip``-Objekte.
+Omar (Datenabruf) erzeugt ``Departure``-Objekte.
+Mo (Speicherung, Statistik) verarbeitet ``Departure``- und ``Trip``-Objekte.
 
 Änderungen an dieser Datei bitte nur gemeinsam absprechen,
 sonst passt der Code der beiden Hälften nicht mehr zusammen.

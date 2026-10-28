@@ -1,4 +1,4 @@
-"""Diagramme mit matplotlib.  [Omar]
+"""Diagramme mit matplotlib.  [Mo]
 
 Alle Funktionen speichern ein PNG und zeigen nichts am Bildschirm an.
 So läuft das auch auf einem Rechner ohne Bildschirm (z. B. Raspberry Pi).
@@ -18,14 +18,14 @@ from tramcheck.models import Trip  # noqa: E402
 def plot_delayed_share(stats: dict[str, LineStats], output_path: Path) -> None:
     """Balkendiagramm: Anteil verspäteter Fahrten pro Linie (in Prozent).
 
-    TODO (Omar):
+    TODO (Mo):
         - ``fig, ax = plt.subplots()``
         - ``ax.bar(linien, prozente)``, Achsen beschriften, Titel setzen
         - Schwellenwert im Titel nennen, z. B. "verspätet = mehr als 3 min"
         - ``fig.savefig(output_path)`` und danach ``plt.close(fig)``
           (sonst wird bei vielen Diagrammen der Speicher voll)
     """
-    raise NotImplementedError("TODO Omar: plot_delayed_share")
+    raise NotImplementedError("TODO Mo: plot_delayed_share")
 
 
 def plot_delay_distribution(trips: list[Trip], output_path: Path) -> None:
@@ -33,15 +33,15 @@ def plot_delay_distribution(trips: list[Trip], output_path: Path) -> None:
 
     Nur Fahrten mit Status "ok" verwenden.
 
-    TODO (Omar): ``ax.boxplot(...)`` mit einer Liste von Verspätungen pro Linie.
+    TODO (Mo): ``ax.boxplot(...)`` mit einer Liste von Verspätungen pro Linie.
     """
-    raise NotImplementedError("TODO Omar: plot_delay_distribution")
+    raise NotImplementedError("TODO Mo: plot_delay_distribution")
 
 
 def plot_delay_by_hour(trips: list[Trip], output_path: Path) -> None:
     """Optional: durchschnittliche Verspätung nach Tageszeit (Stunde 0–23).
 
-    TODO (Omar, optional): pro Linie eine Linie im Diagramm,
+    TODO (Mo, optional): pro Linie eine Linie im Diagramm,
         x = Stunde von ``trip.time_planned``, y = mittlere Verspätung.
     """
-    raise NotImplementedError("TODO Omar (optional): plot_delay_by_hour")
+    raise NotImplementedError("TODO Mo (optional): plot_delay_by_hour")
