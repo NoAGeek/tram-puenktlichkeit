@@ -1,8 +1,8 @@
-"""HTTP-Abruf vom Echtzeit-Monitor der Wiener Linien.  [Omar]
 
-Wichtigste Regel: Dieses Modul wirft NIE eine Exception nach außen.
-Bei jedem Problem wird geloggt und ``None`` zurückgegeben, damit das
-Sammeln über Tage und Wochen weiterläuft.
+"""HTTP-Abruf vom Echtzeit-Monitor der Wiener Linien. [Omar]
+
+Bei Problemen wird eine Warnung geloggt und None zurückgegeben,
+damit das Sammeln der Daten weiterlaufen kann.
 """
 
 import logging
@@ -13,47 +13,56 @@ logger = logging.getLogger(__name__)
 
 
 def fetch_monitor(api_url: str, stop_ids: list[int], timeout: int) -> dict | None:
-    """Fragt den Monitor für mehrere stopIds in EINER Anfrage ab.
+    """Ruft Echtzeitdaten für mehrere Haltestellen von der API ab."""
 
-    Die API akzeptiert ``?stopId=322&stopId=319&stopId=350``.
-    ``requests`` baut das automatisch, wenn man eine Liste übergibt:
-    ``params={"stopId": stop_ids}``.
+    try:
+        response = requests.get(
+            api_url,
+            params={"stopId": stop_ids},
+            timeout=timeout
+        )
 
-    Args:
-        api_url: Basis-URL aus der Config.
-        stop_ids: Liste der stopIds, z. B. ``[319, 322, 350]``.
-        timeout: maximale Wartezeit in Sekunden.
+        response.raise_for_status()
 
-    Returns:
-        Das JSON als Python-``dict``, oder ``None`` bei einem Fehler.
+        return response.json()
 
-    TODO (Omar):
-        1. ``requests.get(...)`` mit ``params`` und ``timeout`` aufrufen
-        2. ``response.raise_for_status()``: wirft Fehler bei HTTP 4xx/5xx
-        3. ``response.json()`` zurückgeben
-        4. Diese Fehler einzeln abfangen, mit ``logger.warning(...)`` loggen
-           und ``None`` zurückgeben:
-           ``requests.Timeout``, ``requests.ConnectionError``,
-           ``requests.RequestException`` (alles andere von requests),
-           ``ValueError`` (Antwort war kein gültiges JSON)
-    """
-    raise NotImplementedError("TODO Omar: fetch_monitor")
+    except requests.Timeout:
+        logger.warning("API request timed out")
+        return None
+
+    except requests.ConnectionError:
+        logger.warning("Could not connect to the API")
+        return None
+
+    except requests.RequestException as error:
+        logger.warning("API request failed: %s", error)
+        return None
+
+    except ValueError:
+        logger.warning("API returned invalid JSON")
+        return None
 
 
 def is_valid_response(data: dict | None) -> bool:
-    """Prüft, ob eine API-Antwort brauchbare Daten enthält.
+    """Prüft, ob die API-Antwort gültige Monitordaten enthält."""
 
-    Achtung: Die API antwortet auch bei einer falschen stopId mit
-    ``message.value == "OK"``, nur ist ``data.monitors`` dann eine leere Liste.
+    if not isinstance(data, dict):
+        return False
 
-    Args:
-        data: Rückgabe von ``fetch_monitor``.
+    message = data.get("message")
+    if not isinstance(message, dict):
+        return False
 
-    Returns:
-        ``True`` nur wenn ``data`` nicht ``None`` ist, ``message.value``
-        gleich ``"OK"`` ist und ``data.monitors`` nicht leer ist.
+    if message.get("value") != "OK":
+        return False
 
-    TODO (Omar): umsetzen. Tipp: ``data.get("data", {}).get("monitors", [])``
-        stürzt nicht ab, wenn ein Schlüssel fehlt.
-    """
-    raise NotImplementedError("TODO Omar: is_valid_response")
+    content = data.get("data")
+    if not isinstance(content, dict):
+        return False
+
+    monitors = content.get("monitors", [])
+
+    if not isinstance(monitors, list) or len(monitors) == 0:
+        return False
+
+    return True
