@@ -1,18 +1,5 @@
-"""Wandelt das JSON der API in ``Departure``-Objekte um.  [Omar]
 
-Reine Funktionen ohne Netzwerk, darum leicht mit Fixtures zu testen.
-
-Struktur der API-Antwort (vereinfacht):
-
-    data.monitors[]                         # ein Eintrag pro stopId
-        .locationStop.properties.attributes.rbl   -> stop_id (int)
-        .lines[]                            # Linien an diesem Bahnsteig
-            .name, .direction, .towards
-            .departures.departure[]         # die einzelnen Abfahrten
-                .departureTime.timePlanned
-                .departureTime.timeReal     # kann fehlen!
-                .vehicle.realtimeSupported
-"""
+"""Wandelt das JSON der Wiener-Linien-API in Departure-Objekte um. [Omar]"""
 
 from datetime import datetime
 
@@ -21,49 +8,102 @@ from tramcheck.models import Departure
 
 
 def parse_api_time(text: str) -> datetime:
-    """Wandelt einen Zeitstempel der API in ein ``datetime`` um.
-
-    Beispiel: ``"2026-10-28T13:53:30.000+0100"`` wird zu einem
-    ``datetime`` mit Zeitzone +01:00. Die Zeitzone bleibt erhalten,
-    damit die Sommer-/Winterzeit-Umstellung keine Fehler macht.
-    """
+    """Wandelt einen API-Zeitstempel in ein datetime-Objekt um."""
     return datetime.fromisoformat(text)
 
 
-def is_wanted(line: str, stop_id: int, direction: str, lines: list[LineConfig]) -> bool:
-    """Prüft, ob diese Kombination in unserer Config steht.
+def is_wanted(
+    line: str,
+    stop_id: int,
+    direction: str,
+    lines: list[LineConfig],
+) -> bool:
+    """Prüft, ob Linie, Haltestelle und Richtung in der Config stehen."""
+    for configured_line in lines:
+        if (
+            configured_line.line == line
+            and configured_line.stop_id == stop_id
+            and configured_line.direction == direction
+        ):
+            return True
 
-    Nötig, weil an einem Bahnsteig auch andere Linien halten.
-    Beispiel: An stopId 319 hält auch der 2er Richtung Friedrich-Engels-Platz,
-    den wollen wir dort aber nicht.
-
-    TODO (Omar): ``True`` zurückgeben, wenn ein Eintrag in ``lines``
-        dieselbe ``line``, ``stop_id`` und ``direction`` hat.
-    """
-    raise NotImplementedError("TODO Omar: is_wanted")
+    return False
 
 
-def parse_monitor(data: dict, lines: list[LineConfig], fetched_at: datetime) -> list[Departure]:
-    """Holt alle gewünschten Abfahrten aus einer API-Antwort.
+def parse_monitor(
+    data: dict,
+    lines: list[LineConfig],
+    fetched_at: datetime,
+) -> list[Departure]:
+    """Liest die gewünschten Abfahrten aus der API-Antwort."""
+    results = []
 
-    Args:
-        data: das JSON von ``api_client.fetch_monitor``.
-        lines: die Linien aus der Config (nur diese werden behalten).
-        fetched_at: Zeitpunkt unserer Abfrage.
+    for monitor in data.get("data", {}).get("monitors", []):
+        attributes = (
+            monitor.get("locationStop", {})
+            .get("properties", {})
+            .get("attributes", {})
+        )
 
-    Returns:
-        Liste von ``Departure``. Leere Liste, wenn nichts Passendes dabei ist.
+        stop_id = attributes.get("rbl")
 
-    TODO (Omar):
-        1. Über ``data["data"]["monitors"]`` gehen, pro Monitor die
-           stop_id aus ``locationStop.properties.attributes.rbl`` lesen
-        2. Darin über ``lines`` gehen, mit ``is_wanted`` filtern
-        3. Darin über ``departures.departure`` gehen und je ein
-           ``Departure`` bauen:
-           - ``time_planned`` mit ``parse_api_time``
-           - ``time_real``: ``None`` wenn der Schlüssel fehlt
-             (Tipp: ``departure_time.get("timeReal")``)
-           - ``realtime_supported`` aus ``vehicle``, falls vorhanden,
-             sonst vom Linien-Eintrag
-    """
-    raise NotImplementedError("TODO Omar: parse_monitor")
+        if stop_id is None:
+            continue
+
+        for line_data in monitor.get("lines", []):
+            line = str(line_data.get("name", ""))
+            direction = str(line_data.get("direction", ""))
+            towards = str(line_data.get("towards", ""))
+
+            if not is_wanted(line, stop_id, direction, lines):
+                continue
+
+            departures = (
+                line_data.get("departures", {})
+                .get("departure", [])
+            )
+
+            for departure in departures:
+                departure_time = departure.get("departureTime", {})
+
+                planned_text = departure_time.get("timePlanned")
+
+                if not planned_text:
+                    continue
+
+                time_planned = parse_api_time(planned_text)
+
+                real_text = departure_time.get("timeReal")
+
+                time_real = (
+                    parse_api_time(real_text)
+                    if real_text
+                    else None
+                )
+
+                vehicle = departure.get("vehicle") or {}
+
+                line_realtime = line_data.get("realtimeSupported")
+                vehicle_realtime = vehicle.get("realtimeSupported")
+
+                if line_realtime is False or vehicle_realtime is False:
+                    realtime_supported = False
+                elif vehicle_realtime is not None:
+                    realtime_supported = vehicle_realtime
+                else:
+                    realtime_supported = bool(line_realtime)
+
+                result = Departure(
+                    fetched_at=fetched_at,
+                    line=line,
+                    stop_id=stop_id,
+                    direction=direction,
+                    towards=towards,
+                    time_planned=time_planned,
+                    time_real=time_real,
+                    realtime_supported=realtime_supported,
+                )
+
+                results.append(result)
+
+    return results

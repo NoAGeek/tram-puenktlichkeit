@@ -1,3 +1,4 @@
+
 """Tests für Omar: api_client und parser. Rufen NIE die echte API auf."""
 
 from datetime import timedelta
@@ -5,6 +6,7 @@ from datetime import timedelta
 from conftest import load_fixture, t, todo
 from tramcheck import api_client
 from tramcheck.parser import parse_api_time, parse_monitor
+
 
 # --- Sicherstellen, dass unsere Fixtures so aussehen wie erwartet ---------
 
@@ -25,10 +27,9 @@ def test_parse_api_time_keeps_timezone():
     assert result.utcoffset() == timedelta(hours=1)
 
 
-# --- Tests für TODO-Funktionen: @todo löschen, sobald umgesetzt -----------
+# --- Tests für die implementierten Funktionen -----------------------------
 
 
-@todo
 def test_parse_monitor_keeps_only_configured_lines(config):
     """In der Antwort steckt auch der 2er Richtung Friedrich-Engels-Platz (stopId 319)."""
     data = load_fixture("monitor_multi_322_319_350.json")
@@ -39,7 +40,6 @@ def test_parse_monitor_keeps_only_configured_lines(config):
     assert len(departures) == 36
 
 
-@todo
 def test_parse_monitor_reads_times(config):
     data = load_fixture("monitor_hoechstaedtplatz_319.json")
     departures = parse_monitor(data, config.lines, fetched_at=t(13, 45, 27))
@@ -50,7 +50,6 @@ def test_parse_monitor_reads_times(config):
     assert first.time_real == t(13, 54, 2)
 
 
-@todo
 def test_parse_monitor_missing_timereal_becomes_none(config):
     data = load_fixture("monitor_no_timereal.json")
     departures = parse_monitor(data, config.lines, fetched_at=t(13, 45))
@@ -60,7 +59,6 @@ def test_parse_monitor_missing_timereal_becomes_none(config):
     assert line_2[1].time_real is not None
 
 
-@todo
 def test_parse_monitor_reads_realtime_supported_false(config):
     data = load_fixture("monitor_realtime_not_supported.json")
     departures = parse_monitor(data, config.lines, fetched_at=t(13, 45))
@@ -70,13 +68,11 @@ def test_parse_monitor_reads_realtime_supported_false(config):
     assert all(d.realtime_supported is False for d in line_31)
 
 
-@todo
 def test_parse_monitor_empty_response_gives_empty_list(config):
     data = load_fixture("monitor_empty.json")
     assert parse_monitor(data, config.lines, fetched_at=t(13, 45)) == []
 
 
-@todo
 def test_empty_response_is_not_valid():
     assert api_client.is_valid_response(load_fixture("monitor_empty.json")) is False
     assert api_client.is_valid_response(None) is False
