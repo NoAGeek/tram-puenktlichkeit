@@ -15,6 +15,7 @@ Das fachliche Herzstück. Regeln:
 """
 
 from datetime import datetime
+from operator import truediv
 
 from tramcheck.models import Departure, Trip
 
@@ -41,15 +42,12 @@ def group_by_trip(observations: list[Departure]) -> dict[tuple, list[Departure]]
 
 
 def has_disappeared(last_seen: datetime, successful_poll_times: list[datetime]) -> bool:
-    """Prüft, ob die Fahrt wirklich aus dem Monitor verschwunden ist.
+   
+    for successful_poll_time in successful_poll_times:
+        if successful_poll_time > last_seen:
+            return True
 
-    Das ist nur sicher, wenn es NACH ``last_seen`` noch mindestens eine
-    erfolgreiche Abfrage gab (in der die Fahrt dann gefehlt hat).
-
-    TODO (Mo): ``True``, wenn irgendein Zeitpunkt in
-        ``successful_poll_times`` größer als ``last_seen`` ist.
-    """
-    raise NotImplementedError("TODO Mo: has_disappeared")
+    return False
 
 
 def build_trip(observations: list[Departure], successful_poll_times: list[datetime]) -> Trip:
