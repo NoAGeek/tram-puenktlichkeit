@@ -6,10 +6,12 @@ api_client -> parser -> storage.save_poll
 
 import logging
 import sqlite3
+import time
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
+from tramcheck import api_client, parser, storage
 from tramcheck.config import Config
 
 logger = logging.getLogger(__name__)
@@ -48,30 +50,33 @@ def poll_once(config: Config, conn: sqlite3.Connection) -> int:
 
     Returns:
         Anzahl der gespeicherten Abfahrten (0 bei Fehler).
-
-    TODO (Omar):
-        1. ``fetched_at = now()``
-        2. ``data = api_client.fetch_monitor(...)``
-        3. Wenn ``not api_client.is_valid_response(data)``:
-           ``storage.save_poll(conn, fetched_at, False, [], "...")`` und 0 zurückgeben
-        4. Sonst ``parser.parse_monitor(...)``, dann
-           ``storage.save_poll(conn, fetched_at, True, departures)``
-        5. Anzahl der Abfahrten zurückgeben und mit ``logger.info`` loggen
     """
-    raise NotImplementedError("TODO Omar: poll_once")
+    fetched_at = now()
+    data = api_client.fetch_monitor(config.api_url, config.stop_ids(), config.request_timeout_seconds)
+
+    if not api_client.is_valid_response(data):
+        storage.save_poll(conn, fetched_at, False, [], "Keine gültige Antwort von der API")
+        logger.warning("Abfrage fehlgeschlagen, als Lücke gespeichert")
+        return 0
+
+    departures = parser.parse_monitor(data, config.lines, fetched_at)
+    storage.save_poll(conn, fetched_at, True, departures)
+    logger.info("%d Abfahrten gespeichert", len(departures))
+    return len(departures)
 
 
 def run_forever(config: Config) -> None:
     """Ruft ``poll_once`` endlos im Abstand ``config.poll_interval_seconds`` auf.
 
-    Beenden mit Strg+C.
-
-    TODO (Omar):
-        - Datenbank öffnen: ``conn = storage.connect(config.database_path)``
-        - ``while True:``-Schleife
-        - Jeden Durchlauf in ``try: ... except Exception: logger.exception(...)``
-          packen: ein unerwarteter Fehler darf die Schleife NICHT beenden
-        - ``KeyboardInterrupt`` (Strg+C) NICHT abfangen, damit man beenden kann
-        - ``time.sleep(config.poll_interval_seconds)``
+    Ein unerwarteter Fehler wird geloggt, beendet die Schleife aber nicht.
+    Beenden mit Strg+C (``KeyboardInterrupt`` wird absichtlich nicht abgefangen).
     """
-    raise NotImplementedError("TODO Omar: run_forever")
+    conn = storage.connect(config.database_path)
+    logger.info("Sammeln gestartet, Abfrage alle %d s", config.poll_interval_seconds)
+
+    while True:
+        try:
+            poll_once(config, conn)
+        except Exception:
+            logger.exception("Unerwarteter Fehler bei der Abfrage, mache weiter")
+        time.sleep(config.poll_interval_seconds)

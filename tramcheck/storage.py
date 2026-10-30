@@ -90,16 +90,33 @@ def save_poll(
 
     Returns:
         Die ``id`` der neuen Zeile in ``polls``.
-
-    TODO (Mo):
-        1. ``INSERT INTO polls ...``, die neue id steht danach in
-           ``cursor.lastrowid``
-        2. Für jede Departure ``INSERT INTO observations ...`` mit dieser poll_id
-           (Tipp: ``conn.executemany`` für viele Zeilen auf einmal)
-        3. Immer ``?``-Platzhalter verwenden, nie f-Strings im SQL!
-        4. ``conn.commit()`` am Ende
     """
-    raise NotImplementedError("TODO Mo: save_poll")
+    cursor = conn.execute(
+        "INSERT INTO polls (fetched_at, success, error_message) VALUES (?, ?, ?)",
+        (to_text(fetched_at), int(success), error_message),
+    )
+    poll_id = cursor.lastrowid
+
+    conn.executemany(
+        """INSERT INTO observations
+           (poll_id, line, stop_id, direction, towards, time_planned, time_real, realtime_supported)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+        [
+            (
+                poll_id,
+                d.line,
+                d.stop_id,
+                d.direction,
+                d.towards,
+                to_text(d.time_planned),
+                to_text(d.time_real),
+                int(d.realtime_supported),
+            )
+            for d in departures
+        ],
+    )
+    conn.commit()
+    return poll_id
 
 
 def load_successful_poll_times(conn: sqlite3.Connection) -> list[datetime]:
