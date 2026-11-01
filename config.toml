@@ -19,6 +19,10 @@ database_path = "data/tramcheck.db"
 log_path = "data/collector.log"
 chart_dir = "data/charts"
 
+# Hier legt GitHub Actions pro Lauf eine eigene kleine Datenbank ab.
+# build-trips übernimmt sie automatisch in database_path.
+raw_dir = "data/raw"
+
 # Die gemessenen Linien. Alle Richtung Stadtzentrum.
 # stop_id = Bahnsteig-Nummer (RBL) aus wienerlinien-ogd-haltepunkte.csv
 # direction = Feld "direction" in der API ("H" = Hinweg, "R" = Rückweg)

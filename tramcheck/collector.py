@@ -65,18 +65,26 @@ def poll_once(config: Config, conn: sqlite3.Connection) -> int:
     return len(departures)
 
 
-def run_forever(config: Config) -> None:
-    """Ruft ``poll_once`` endlos im Abstand ``config.poll_interval_seconds`` auf.
+def run_forever(config: Config, database_path: Path | None = None, max_minutes: float | None = None) -> None:
+    """Ruft ``poll_once`` im Abstand ``config.poll_interval_seconds`` auf.
 
     Ein unerwarteter Fehler wird geloggt, beendet die Schleife aber nicht.
     Beenden mit Strg+C (``KeyboardInterrupt`` wird absichtlich nicht abgefangen).
+
+    Args:
+        database_path: andere Datenbank als in der Config (für GitHub Actions).
+        max_minutes: nach so vielen Minuten aufhören. ``None`` = endlos.
     """
-    conn = storage.connect(config.database_path)
+    conn = storage.connect(database_path or config.database_path)
+    deadline = time.monotonic() + max_minutes * 60 if max_minutes else None
     logger.info("Sammeln gestartet, Abfrage alle %d s", config.poll_interval_seconds)
 
-    while True:
+    while deadline is None or time.monotonic() < deadline:
         try:
             poll_once(config, conn)
         except Exception:
             logger.exception("Unerwarteter Fehler bei der Abfrage, mache weiter")
         time.sleep(config.poll_interval_seconds)
+
+    conn.close()
+    logger.info("Geplante Laufzeit von %s min erreicht, Sammeln beendet", max_minutes)

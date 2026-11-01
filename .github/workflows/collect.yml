@@ -1,0 +1,59 @@
+# Sammelt die Daten auf einem Rechner von GitHub, damit kein PC durchlaufen muss.
+#
+# Jeder Lauf sammelt 2 Stunden lang jede Minute und legt eine eigene kleine
+# Datenbank in data/raw/ ab. Der Zeitplan stößt jede Stunde einen Lauf an.
+# Weil "concurrency" nur einen Lauf gleichzeitig erlaubt, wartet der nächste
+# und startet sofort, wenn der vorige fertig ist. So bleiben die Lücken klein.
+#
+# Von Hand starten: GitHub -> Actions -> "Daten sammeln" -> "Run workflow".
+
+name: Daten sammeln
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    env:
+      TZ: Europe/Vienna
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Sammeln (120 Minuten)
+        run: |
+          mkdir -p data/raw
+          FILE="data/raw/$(date -u +%Y-%m-%dT%H%MZ).db"
+          echo "FILE=$FILE" >> "$GITHUB_ENV"
+          python -m tramcheck collect --minutes 120 --database "$FILE"
+
+      - name: Rohdaten ins Repo speichern
+        if: always()
+        run: |
+          [ -f "$FILE" ] || exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$FILE"
+          git commit -m "Daten: $(basename "$FILE")"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase && git push && exit 0
+            sleep 10
+          done
+          exit 1

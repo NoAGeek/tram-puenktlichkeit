@@ -7,7 +7,9 @@ __pycache__/
 .pytest_cache/
 
 # Gesammelte Daten, Logs und Diagramme (zu groß / ändern sich ständig)
-data/
+data/*
+# Ausnahme: die kleinen Rohdaten-Dateien, die GitHub Actions sammelt
+!data/raw/
 
 # Editor-Einstellungen (PyCharm, VS Code)
 .idea/

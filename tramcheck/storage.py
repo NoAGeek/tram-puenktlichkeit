@@ -119,6 +119,46 @@ def save_poll(
     return poll_id
 
 
+def import_database(conn: sqlite3.Connection, other_path: str | Path) -> int:
+    """Übernimmt Abfragen und Beobachtungen aus einer anderen Datenbank.
+
+    Abfragen, deren ``fetched_at`` schon vorhanden ist, werden übersprungen.
+    Darum darf man dieselbe Datei beliebig oft importieren.
+
+    Returns:
+        Anzahl der neu übernommenen Abfragen.
+    """
+    other = sqlite3.connect(other_path)
+    known = {row[0] for row in conn.execute("SELECT fetched_at FROM polls")}
+    imported = 0
+
+    for poll_id, fetched_at, success, error_message in other.execute(
+        "SELECT id, fetched_at, success, error_message FROM polls ORDER BY id"
+    ):
+        if fetched_at in known:
+            continue
+        new_id = conn.execute(
+            "INSERT INTO polls (fetched_at, success, error_message) VALUES (?, ?, ?)",
+            (fetched_at, success, error_message),
+        ).lastrowid
+        rows = other.execute(
+            """SELECT line, stop_id, direction, towards, time_planned, time_real, realtime_supported
+               FROM observations WHERE poll_id = ?""",
+            (poll_id,),
+        ).fetchall()
+        conn.executemany(
+            """INSERT INTO observations
+               (poll_id, line, stop_id, direction, towards, time_planned, time_real, realtime_supported)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+            [(new_id, *row) for row in rows],
+        )
+        imported += 1
+
+    other.close()
+    conn.commit()
+    return imported
+
+
 def load_successful_poll_times(conn: sqlite3.Connection) -> list[datetime]:
     """Alle Zeitpunkte erfolgreicher Abfragen, aufsteigend sortiert.
 

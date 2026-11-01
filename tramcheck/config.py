@@ -30,6 +30,7 @@ class Config:
     database_path: Path
     log_path: Path
     chart_dir: Path
+    raw_dir: Path
     lines: list[LineConfig]
 
     def stop_ids(self) -> list[int]:
@@ -62,5 +63,6 @@ def load_config(path: str | Path = "config.toml") -> Config:
         database_path=base_dir / raw["database_path"],
         log_path=base_dir / raw["log_path"],
         chart_dir=base_dir / raw["chart_dir"],
+        raw_dir=base_dir / raw["raw_dir"],
         lines=[LineConfig(**entry) for entry in raw["lines"]],
     )

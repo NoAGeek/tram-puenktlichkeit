@@ -47,3 +47,18 @@ def test_save_and_load_trips_roundtrip():
     storage.replace_trips(conn, [trip])  # zweimal: darf keine Duplikate geben
 
     assert storage.load_trips(conn) == [trip]
+
+
+def test_import_database_copies_polls_once(tmp_path):
+    raw = storage.connect(tmp_path / "raw.db")
+    dep = make_departure(fetched_at=t(13, 45), time_planned=t(13, 53, 30), time_real=t(13, 54))
+    storage.save_poll(raw, t(13, 45), True, [dep])
+    storage.save_poll(raw, t(13, 46), False, [], "Timeout")
+    raw.close()
+
+    main = storage.connect(":memory:")
+    assert storage.import_database(main, tmp_path / "raw.db") == 2
+    assert storage.import_database(main, tmp_path / "raw.db") == 0  # zweimal: keine Duplikate
+
+    assert storage.load_observations(main) == [dep]
+    assert storage.load_successful_poll_times(main) == [t(13, 45)]

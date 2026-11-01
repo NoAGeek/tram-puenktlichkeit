@@ -143,9 +143,22 @@ Regeln für Änderungen:
 
 ## Langzeitbetrieb
 
-Zum Sammeln braucht ihr ein Gerät, das Tage bis Wochen durchläuft und **nicht in den
-Ruhemodus geht** (Desktop-PC, Raspberry Pi, Server). Fehler wie Timeouts oder leere Antworten
-landen in `data/collector.log` und beenden das Programm nicht.
+Gesammelt wird automatisch von **GitHub Actions** (`.github/workflows/collect.yml`), kein PC muss
+durchlaufen. Jeder Lauf sammelt 2 Stunden lang jede Minute und speichert eine eigene kleine
+Datenbank in `data/raw/`. Jede Stunde wird ein neuer Lauf angestoßen, der wartet, bis der vorige
+fertig ist. Läuft auf dem öffentlichen Repo kostenlos.
+
+Auswerten:
+
+```
+git pull                          # neue Rohdaten holen
+python -m tramcheck build-trips   # data/raw/ übernehmen, Fahrten berechnen
+python -m tramcheck report
+```
+
+Zwischen zwei Läufen entsteht eine Lücke von etwa einer Minute. Fahrten in dieser Lücke
+werden als `unsure` markiert. Lokal sammeln geht weiterhin mit `python -m tramcheck collect`.
+Fehler wie Timeouts oder leere Antworten landen im Log und beenden das Programm nicht.
 
 ## Datenquelle
 
