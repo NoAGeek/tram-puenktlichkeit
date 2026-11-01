@@ -13,6 +13,10 @@ on:
   schedule:
     - cron: "0 * * * *"
   workflow_dispatch:
+    inputs:
+      minutes:
+        description: "Wie viele Minuten sammeln (zum Testen z. B. 3)"
+        default: "120"
 
 concurrency:
   group: collect
@@ -37,12 +41,12 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Sammeln (120 Minuten)
+      - name: Sammeln
         run: |
           mkdir -p data/raw
           FILE="data/raw/$(date -u +%Y-%m-%dT%H%MZ).db"
           echo "FILE=$FILE" >> "$GITHUB_ENV"
-          python -m tramcheck collect --minutes 120 --database "$FILE"
+          python -m tramcheck collect --minutes "${{ inputs.minutes || 120 }}" --database "$FILE"
 
       - name: Rohdaten ins Repo speichern
         if: always()
