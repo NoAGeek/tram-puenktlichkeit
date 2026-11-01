@@ -79,30 +79,30 @@ entgegen. Dadurch kann jeder für sich arbeiten und testen, ohne auf den anderen
 
 ### Omar: Datenabruf von der API
 
-| Datei | Funktion | Test (`@todo` löschen, wenn fertig) |
+| Datei | Funktion | Test |
 |---|---|---|
-| `parser.py` | [ ] `is_wanted` | über `test_parse_monitor_*` |
-| `parser.py` | [ ] `parse_monitor` | `test_parser.py`: 5 Tests |
-| `api_client.py` | [ ] `is_valid_response` | `test_empty_response_is_not_valid` |
-| `api_client.py` | [ ] `fetch_monitor` | eigenen Test schreiben (mit `unittest.mock`) |
-| `collector.py` | [ ] `poll_once` | erst wenn `storage.save_poll` von Mo fertig ist |
-| `collector.py` | [ ] `run_forever` | per Hand: `python -m tramcheck collect` |
+| `parser.py` | [x] `is_wanted` | über `test_parse_monitor_*` |
+| `parser.py` | [x] `parse_monitor` | `test_parser.py`: 5 Tests |
+| `api_client.py` | [x] `is_valid_response` | `test_empty_response_is_not_valid` |
+| `api_client.py` | [x] `fetch_monitor` | über `test_collector.py` (API durch Fixture ersetzt) |
+| `collector.py` | [x] `poll_once` | `test_collector.py` |
+| `collector.py` | [x] `run_forever` | per Hand: `python -m tramcheck collect` |
 
 Empfohlene Reihenfolge: `parser.py` zuerst (geht komplett mit den Fixtures, ohne Internet).
 
 ### Mo: Speicherung, Statistik und Diagramme
 
-| Datei | Funktion | Test (`@todo` löschen, wenn fertig) |
+| Datei | Funktion | Test |
 |---|---|---|
-| `trips.py` | [ ] `group_by_trip` | eigenen Test schreiben |
-| `trips.py` | [ ] `has_disappeared` | über `test_trip_is_unsure_*` |
-| `trips.py` | [ ] `build_trip` | `test_trips.py`: 4 Tests |
-| `trips.py` | [ ] `build_trips` | eigenen Test schreiben |
-| `storage.py` | [ ] `save_poll`, `load_observations`, `load_successful_poll_times` | `test_storage.py`: 2 Tests |
-| `storage.py` | [ ] `replace_trips`, `load_trips` | eigenen Test schreiben |
-| `analysis.py` | [ ] `compute_line_stats` | `test_line_stats_counts_only_ok_trips` |
-| `charts.py` | [ ] `plot_delayed_share`, `plot_delay_distribution` | per Hand: PNG anschauen |
-| `charts.py` | [ ] `plot_delay_by_hour` (optional) | per Hand |
+| `trips.py` | [x] `group_by_trip` | `test_group_by_trip_sorts_each_trip_by_time` |
+| `trips.py` | [x] `has_disappeared` | über `test_trip_is_unsure_*` |
+| `trips.py` | [x] `build_trip` | `test_trips.py`: 5 Tests |
+| `trips.py` | [x] `build_trips` | `test_build_trips_makes_one_trip_per_key` |
+| `storage.py` | [x] `save_poll`, `load_observations`, `load_successful_poll_times` | `test_storage.py`: 2 Tests |
+| `storage.py` | [x] `replace_trips`, `load_trips` | `test_save_and_load_trips_roundtrip` |
+| `analysis.py` | [x] `compute_line_stats` | `test_line_stats_counts_only_ok_trips` |
+| `charts.py` | [x] `plot_delayed_share`, `plot_delay_distribution` | `test_charts.py` + PNG anschauen |
+| `charts.py` | [x] `plot_delay_by_hour` | `test_charts.py` |
 
 Empfohlene Reihenfolge: `trips.py` zuerst (das ist das fachliche Herzstück und geht ganz
 ohne Datenbank und API).
@@ -110,7 +110,7 @@ ohne Datenbank und API).
 ### Gemeinsam
 
 - [ ] `models.py` und `config.toml` gemeinsam durchgehen, danach nur noch gemeinsam ändern
-- [ ] Sammeln starten, sobald Omars Teil und `storage.save_poll` fertig sind (je früher, desto mehr Daten!)
+- [x] Sammeln starten, sobald Omars Teil und `storage.save_poll` fertig sind (je früher, desto mehr Daten!)
 - [ ] Am Ende: `build-trips` + `report` laufen lassen und Ergebnisse gemeinsam interpretieren
 
 ## Fachliche Regeln
@@ -121,19 +121,25 @@ ohne Datenbank und API).
 - **Verspätet** heißt mehr als `delay_threshold_seconds` (180 s = 3 min) zu spät. Verfrühte Fahrten gelten als pünktlich.
 - Fahrten ohne `timeReal` (`no_realtime`), mit `realtimeSupported: false` (`not_supported`)
   und Fahrten, die nur wegen einer Datenlücke verschwunden sind (`unsure`), werden
-  gekennzeichnet und **nicht** als pünktlich gezählt.
+  gekennzeichnet und **nicht** als pünktlich gezählt. Als Datenlücke gilt auch, wenn nach
+  der letzten Sichtung mehr als 5 Minuten keine erfolgreiche Abfrage kam (`MAX_GAP` in `trips.py`).
 - Die Rohdaten (`observations`) werden nie verändert. Die Tabelle `trips` kann jederzeit
   mit `build-trips` neu berechnet werden.
 
-## So arbeitet ihr am Gerüst weiter
+## Stand
 
-1. Funktionen mit `raise NotImplementedError("TODO ...")` sind eure Aufgaben. Im Docstring
-   steht jeweils, was sie tun sollen, und Tipps zum Vorgehen.
-2. Zu fast jeder TODO-Funktion gibt es schon einen Test, der mit `@todo` markiert ist und
-   deshalb übersprungen wird. Wenn ihr eine Funktion fertig habt: `@todo` darüber löschen
-   und `pytest` laufen lassen.
-3. `models.py` nur gemeinsam ändern.
-4. Die Tests rufen nie die echte API auf. Neue Sonderfälle als JSON nach `tests/fixtures/` legen.
+Alle Funktionen sind umgesetzt, `pytest` läuft komplett grün. Ablauf:
+
+```
+python -m tramcheck collect       # sammeln, beenden mit Strg+C
+python -m tramcheck build-trips   # Fahrten aus den Rohdaten berechnen
+python -m tramcheck report        # Kennzahlen + Diagramme in data/charts/
+```
+
+Regeln für Änderungen:
+
+1. `models.py` nur gemeinsam ändern.
+2. Die Tests rufen nie die echte API auf. Neue Sonderfälle als JSON nach `tests/fixtures/` legen.
 
 ## Langzeitbetrieb
 

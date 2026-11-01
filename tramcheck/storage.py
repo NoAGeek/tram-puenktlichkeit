@@ -123,35 +123,79 @@ def load_successful_poll_times(conn: sqlite3.Connection) -> list[datetime]:
     """Alle Zeitpunkte erfolgreicher Abfragen, aufsteigend sortiert.
 
     Wird von ``trips.build_trips`` gebraucht, um Datenlücken zu erkennen.
-
-    TODO (Mo): ``SELECT fetched_at FROM polls WHERE success = 1 ORDER BY fetched_at``
     """
-    raise NotImplementedError("TODO Mo: load_successful_poll_times")
+    rows = conn.execute("SELECT fetched_at FROM polls WHERE success = 1").fetchall()
+    return sorted(from_text(row[0]) for row in rows)
 
 
 def load_observations(conn: sqlite3.Connection) -> list[Departure]:
     """Liest alle Beobachtungen wieder als ``Departure``-Objekte.
 
     ``fetched_at`` kommt aus der Tabelle ``polls`` (JOIN über ``poll_id``).
-
-    TODO (Mo): SELECT mit JOIN, jede Zeile in ein ``Departure`` umbauen
-        (Zeiten mit ``from_text``, ``realtime_supported`` mit ``bool(...)``).
     """
-    raise NotImplementedError("TODO Mo: load_observations")
+    rows = conn.execute(
+        """SELECT p.fetched_at, o.line, o.stop_id, o.direction, o.towards,
+                  o.time_planned, o.time_real, o.realtime_supported
+           FROM observations o JOIN polls p ON p.id = o.poll_id
+           ORDER BY o.id"""
+    ).fetchall()
+    return [
+        Departure(
+            fetched_at=from_text(fetched_at),
+            line=line,
+            stop_id=stop_id,
+            direction=direction,
+            towards=towards,
+            time_planned=from_text(time_planned),
+            time_real=from_text(time_real),
+            realtime_supported=bool(realtime_supported),
+        )
+        for fetched_at, line, stop_id, direction, towards, time_planned, time_real, realtime_supported in rows
+    ]
 
 
 def replace_trips(conn: sqlite3.Connection, trips: list[Trip]) -> None:
-    """Löscht alle alten Fahrten und speichert die neu berechneten.
-
-    TODO (Mo): ``DELETE FROM trips``, dann alle ``trips`` einfügen,
-        dann ``conn.commit()``.
-    """
-    raise NotImplementedError("TODO Mo: replace_trips")
+    """Löscht alle alten Fahrten und speichert die neu berechneten."""
+    conn.execute("DELETE FROM trips")
+    conn.executemany(
+        """INSERT INTO trips
+           (line, stop_id, direction, time_planned, final_time_real,
+            delay_seconds, status, observation_count)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+        [
+            (
+                trip.line,
+                trip.stop_id,
+                trip.direction,
+                to_text(trip.time_planned),
+                to_text(trip.final_time_real),
+                trip.delay_seconds,
+                trip.status,
+                trip.observation_count,
+            )
+            for trip in trips
+        ],
+    )
+    conn.commit()
 
 
 def load_trips(conn: sqlite3.Connection) -> list[Trip]:
-    """Liest alle berechneten Fahrten als ``Trip``-Objekte.
-
-    TODO (Mo): umsetzen, analog zu ``load_observations``.
-    """
-    raise NotImplementedError("TODO Mo: load_trips")
+    """Liest alle berechneten Fahrten als ``Trip``-Objekte."""
+    rows = conn.execute(
+        """SELECT line, stop_id, direction, time_planned, final_time_real,
+                  delay_seconds, status, observation_count
+           FROM trips ORDER BY time_planned, line"""
+    ).fetchall()
+    return [
+        Trip(
+            line=line,
+            stop_id=stop_id,
+            direction=direction,
+            time_planned=from_text(time_planned),
+            final_time_real=from_text(final_time_real),
+            delay_seconds=delay_seconds,
+            status=status,
+            observation_count=observation_count,
+        )
+        for line, stop_id, direction, time_planned, final_time_real, delay_seconds, status, observation_count in rows
+    ]

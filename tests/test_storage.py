@@ -1,7 +1,7 @@
 """Tests für Mo: storage. Datenbank nur im Arbeitsspeicher (":memory:")."""
 
-from conftest import make_departure, t, todo
-from tramcheck import storage
+from conftest import make_departure, t
+from tramcheck import models, storage
 
 
 def test_connect_creates_all_tables():
@@ -16,10 +16,9 @@ def test_datetime_text_roundtrip():
     assert storage.from_text(storage.to_text(None)) is None
 
 
-# --- Tests für TODO-Funktionen: @todo löschen, sobald umgesetzt -----------
+# --- Tests für die umgesetzten Funktionen -----------------------------
 
 
-@todo
 def test_save_and_load_observations_roundtrip():
     conn = storage.connect(":memory:")
     dep = make_departure(fetched_at=t(13, 45), time_planned=t(13, 53, 30), time_real=None)
@@ -29,10 +28,22 @@ def test_save_and_load_observations_roundtrip():
     assert storage.load_observations(conn) == [dep]
 
 
-@todo
 def test_failed_poll_is_saved_but_not_counted_as_successful():
     conn = storage.connect(":memory:")
     storage.save_poll(conn, t(13, 45), True, [])
     storage.save_poll(conn, t(13, 46), False, [], "Timeout")
 
     assert storage.load_successful_poll_times(conn) == [t(13, 45)]
+
+
+def test_save_and_load_trips_roundtrip():
+    conn = storage.connect(":memory:")
+    trip = models.Trip(
+        line="2", stop_id=322, direction="R", time_planned=t(14, 0),
+        final_time_real=t(14, 4), delay_seconds=240, status=models.STATUS_OK, observation_count=3,
+    )
+
+    storage.replace_trips(conn, [trip])
+    storage.replace_trips(conn, [trip])  # zweimal: darf keine Duplikate geben
+
+    assert storage.load_trips(conn) == [trip]

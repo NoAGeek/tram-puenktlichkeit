@@ -5,7 +5,9 @@ Alle anderen werden extra gezählt und NIE als pünktlich gewertet.
 """
 
 from dataclasses import dataclass
+from statistics import mean
 
+from tramcheck import models
 from tramcheck.models import Trip
 
 
@@ -50,10 +52,26 @@ def compute_line_stats(trips: list[Trip], threshold_seconds: int) -> dict[str, L
 
     Returns:
         ``dict`` Liniennummer -> ``LineStats``.
-
-    TODO (Mo):
-        1. Fahrten nach ``trip.line`` gruppieren
-        2. Pro Linie zählen und rechnen (siehe Attribute von ``LineStats``)
-        3. Für den Durchschnitt hilft ``statistics.mean`` aus der Standardbibliothek
     """
-    raise NotImplementedError("TODO Mo: compute_line_stats")
+    by_line = {}
+    for trip in trips:
+        by_line.setdefault(trip.line, []).append(trip)
+
+    stats = {}
+    for line, line_trips in by_line.items():
+        delays = [trip.delay_seconds for trip in line_trips if trip.status == models.STATUS_OK]
+        delayed = [d for d in delays if is_delayed(d, threshold_seconds)]
+        statuses = [trip.status for trip in line_trips]
+
+        stats[line] = LineStats(
+            line=line,
+            trips_total=len(line_trips),
+            trips_evaluated=len(delays),
+            trips_delayed=len(delayed),
+            delayed_share=len(delayed) / len(delays) if delays else None,
+            mean_delay_seconds=mean(delays) if delays else None,
+            trips_without_realtime=statuses.count(models.STATUS_NO_REALTIME)
+            + statuses.count(models.STATUS_NOT_SUPPORTED),
+            trips_unsure=statuses.count(models.STATUS_UNSURE),
+        )
+    return stats

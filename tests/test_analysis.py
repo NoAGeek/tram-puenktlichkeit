@@ -2,7 +2,7 @@
 
 import pytest
 
-from conftest import t, todo
+from conftest import t
 from tramcheck import models
 from tramcheck.analysis import compute_line_stats, is_delayed
 
@@ -27,10 +27,9 @@ def make_trip(line: str, delay: int | None, status: str = models.STATUS_OK) -> m
     )
 
 
-# --- Tests für TODO-Funktionen: @todo löschen, sobald umgesetzt -----------
+# --- Tests für die umgesetzten Funktionen -----------------------------
 
 
-@todo
 def test_line_stats_counts_only_ok_trips():
     trips = [
         make_trip("2", 60),
