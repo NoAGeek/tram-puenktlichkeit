@@ -48,7 +48,7 @@ def cmd_report(config, args) -> None:
 
     config.chart_dir.mkdir(parents=True, exist_ok=True)
     charts.plot_delayed_share(stats, config.chart_dir / "anteil_verspaetet.png", config.delay_threshold_seconds)
-    charts.plot_delay_distribution(all_trips, config.chart_dir / "verteilung.png")
+    charts.plot_delay_distribution(all_trips, config.chart_dir / "verteilung.png", config.delay_threshold_seconds)
     charts.plot_delay_by_hour(all_trips, config.chart_dir / "nach_uhrzeit.png")
     print(f"Diagramme gespeichert in {config.chart_dir}")
 

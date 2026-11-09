@@ -38,84 +38,123 @@ def style_axes(ax) -> None:
     ax.set_axisbelow(True)
 
 
+# Stufen der Pünktlichkeit, von "zu früh" bis "verspätet".
+# Blau = früh, Grau = pünktlich, Orange immer dunkler = immer später.
+DELAY_BANDS = [
+    ("mehr als 1 min zu früh", "#2a78d6", "white"),
+    ("pünktlich (± 1 min)", "#c3c2b7", "#0b0b0b"),
+    ("1 bis 3 min zu spät", "#f5a978", "#0b0b0b"),
+    ("mehr als 3 min zu spät", "#c8441b", "white"),
+]
+
+
+def delay_band(delay_seconds: int, threshold_seconds: int) -> int:
+    """In welche Stufe von ``DELAY_BANDS`` fällt eine Verspätung? (0 bis 3)"""
+    if delay_seconds < -60:
+        return 0
+    if delay_seconds <= 60:
+        return 1
+    if delay_seconds <= threshold_seconds:
+        return 2
+    return 3
+
+
+def ok_trips_by_line(trips: list[Trip]) -> dict[str, list[Trip]]:
+    """Nur Fahrten mit sicher bestimmter Verspätung, nach Linie sortiert."""
+    by_line = {}
+    for trip in trips:
+        if trip.status == models.STATUS_OK:
+            by_line.setdefault(trip.line, []).append(trip)
+    return by_line
+
+
+def save(fig, output_path: Path) -> None:
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+
+
 def plot_delayed_share(stats: dict[str, LineStats], output_path: Path, threshold_seconds: int = 180) -> None:
-    """Balkendiagramm: Anteil verspäteter Fahrten pro Linie (in Prozent)."""
+    """Balkendiagramm: Wie viel Prozent der Fahrten waren verspätet? Eine Zahl pro Linie."""
     lines = [line for line in sort_lines(stats) if stats[line].delayed_share is not None]
     shares = [stats[line].delayed_share * 100 for line in lines]
 
     fig, ax = plt.subplots(figsize=(7, 4.5))
-    bars = ax.bar(lines, shares, width=0.6, color=[LINE_COLORS.get(line, "#888888") for line in lines])
-    ax.bar_label(bars, labels=[f"{share:.1f} %" for share in shares], padding=3, color=TEXT_COLOR)
+    bars = ax.bar([f"Linie {line}" for line in lines], shares, width=0.6,
+                  color=[LINE_COLORS.get(line, "#888888") for line in lines])
+    labels = [
+        f"{share:.1f} %\n{stats[line].trips_delayed} von {stats[line].trips_evaluated}"
+        for line, share in zip(lines, shares)
+    ]
+    ax.bar_label(bars, labels=labels, padding=4, color=TEXT_COLOR)
 
-    ax.set_xlabel("Linie")
-    ax.set_ylabel("Anteil verspätet (%)")
-    ax.set_title(f"Anteil verspäteter Fahrten (verspätet = mehr als {threshold_seconds // 60} min)")
-    ax.set_ylim(0, max(shares + [10]) * 1.15)
+    ax.set_ylabel("verspätete Fahrten (%)")
+    ax.set_title(f"Wie oft ist die Bim mehr als {threshold_seconds // 60} Minuten zu spät?", loc="left")
+    ax.set_ylim(0, max(shares + [5]) * 1.35)
     style_axes(ax)
-
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=150)
-    plt.close(fig)
+    save(fig, output_path)
 
 
-def plot_delay_distribution(trips: list[Trip], output_path: Path) -> None:
-    """Boxplot: Verteilung der Verspätung (in Minuten) pro Linie.
+def plot_delay_distribution(trips: list[Trip], output_path: Path, threshold_seconds: int = 180) -> None:
+    """Gestapelter Balken pro Linie: Von 100 Fahrten waren so viele früh, pünktlich, spät.
 
     Nur Fahrten mit Status "ok" werden verwendet.
     """
-    by_line = {}
-    for trip in trips:
-        if trip.status == models.STATUS_OK:
-            by_line.setdefault(trip.line, []).append(trip.delay_seconds / 60)
-    lines = sort_lines(by_line)
+    by_line = ok_trips_by_line(trips)
+    lines = sort_lines(by_line)[::-1]  # von oben nach unten: 2, 5, 12, 31
 
-    fig, ax = plt.subplots(figsize=(7, 4.5))
+    fig, ax = plt.subplots(figsize=(9, 1.0 + 0.8 * max(len(lines), 1)))
+    for row, line in enumerate(lines):
+        counts = [0] * len(DELAY_BANDS)
+        for trip in by_line[line]:
+            counts[delay_band(trip.delay_seconds, threshold_seconds)] += 1
+        total = sum(counts)
+
+        left = 0.0
+        for (name, color, text_color), count in zip(DELAY_BANDS, counts):
+            width = count / total * 100
+            ax.barh(row, width, left=left, height=0.6, color=color, edgecolor="white", linewidth=2,
+                    label=name if row == 0 else None)
+            if width >= 6:
+                ax.text(left + width / 2, row, f"{width:.0f} %", ha="center", va="center",
+                        color=text_color, fontsize=9)
+            left += width
+
+    ax.set_yticks(range(len(lines)), [f"Linie {line}" for line in lines])
+    ax.set_xlim(0, 100)
+    ax.set_xticks([])
+    for side in ("top", "right", "bottom", "left"):
+        ax.spines[side].set_visible(False)
+    ax.tick_params(colors=TEXT_COLOR, length=0)
+    ax.set_title("Von 100 Fahrten waren ...", loc="left")
     if lines:
-        boxes = ax.boxplot([by_line[line] for line in lines], patch_artist=True, widths=0.5)
-        ax.set_xticks(range(1, len(lines) + 1), lines)
-        for patch, line in zip(boxes["boxes"], lines):
-            patch.set_facecolor(LINE_COLORS.get(line, "#888888"))
-            patch.set_alpha(0.6)
-        for median in boxes["medians"]:
-            median.set_color("#0b0b0b")
-    ax.axhline(0, color=TEXT_COLOR, linewidth=0.8, linestyle="--")
+        ax.legend(ncols=len(DELAY_BANDS), loc="upper left", bbox_to_anchor=(0, 0), frameon=False, fontsize=9)
+    save(fig, output_path)
 
-    ax.set_xlabel("Linie")
-    ax.set_ylabel("Verspätung (min), negativ = zu früh")
-    ax.set_title("Verteilung der Verspätung pro Linie")
+
+def plot_delay_by_hour(trips: list[Trip], output_path: Path, min_trips: int = 20) -> None:
+    """Balken pro Stunde: durchschnittliche Verspätung aller Linien zusammen.
+
+    Stunden mit weniger als ``min_trips`` Fahrten werden weggelassen,
+    weil der Durchschnitt dort vom Zufall abhängt.
+    """
+    by_hour = {}
+    for line_trips in ok_trips_by_line(trips).values():
+        for trip in line_trips:
+            by_hour.setdefault(trip.time_planned.hour, []).append(trip.delay_seconds / 60)
+    hours = sorted(h for h in by_hour if len(by_hour[h]) >= min_trips)
+    means = [sum(by_hour[h]) / len(by_hour[h]) for h in hours]
+
+    fig, ax = plt.subplots(figsize=(9, 4.5))
+    colors = ["#c8441b" if m > 0 else "#2a78d6" for m in means]
+    ax.bar(hours, means, width=0.7, color=colors)
+    ax.axhline(0, color=TEXT_COLOR, linewidth=0.8)
+
+    # Alle Stunden beschriften, damit Stunden ohne genug Daten als Lücke sichtbar bleiben
+    ax.set_xlim(-0.6, 23.6)
+    ax.set_xticks(range(24), [f"{h}" for h in range(24)])
+    ax.set_xlabel(f"Uhrzeit (Stunde); Lücke = weniger als {min_trips} Fahrten gemessen")
+    ax.set_ylabel("Ø Minuten (über 0 = zu spät, unter 0 = zu früh)")
+    ax.set_title("Zu welcher Uhrzeit sind die Bims am unpünktlichsten? (alle Linien)", loc="left")
     style_axes(ax)
-
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=150)
-    plt.close(fig)
-
-
-def plot_delay_by_hour(trips: list[Trip], output_path: Path) -> None:
-    """Durchschnittliche Verspätung nach Tageszeit (Stunde 0–23), eine Linie pro Bim-Linie."""
-    sums = {}
-    for trip in trips:
-        if trip.status == models.STATUS_OK:
-            hours = sums.setdefault(trip.line, {})
-            hours.setdefault(trip.time_planned.hour, []).append(trip.delay_seconds / 60)
-
-    fig, ax = plt.subplots(figsize=(8, 4.5))
-    for line in sort_lines(sums):
-        hours = sorted(sums[line])
-        means = [sum(sums[line][h]) / len(sums[line][h]) for h in hours]
-        color = LINE_COLORS.get(line, "#888888")
-        ax.plot(hours, means, color=color, linewidth=2, marker="o", markersize=4, label=f"Linie {line}")
-        ax.annotate(f"{line}", (hours[-1], means[-1]), xytext=(6, 0), textcoords="offset points",
-                    color=TEXT_COLOR, va="center")
-
-    ax.set_xlim(0, 23)
-    ax.set_xticks(range(0, 24, 2))
-    ax.set_xlabel("Uhrzeit (Stunde, geplante Abfahrt)")
-    ax.set_ylabel("mittlere Verspätung (min)")
-    ax.set_title("Verspätung nach Tageszeit")
-    if sums:
-        ax.legend(frameon=False)
-    style_axes(ax)
-
-    fig.tight_layout()
-    fig.savefig(output_path, dpi=150)
-    plt.close(fig)
+    save(fig, output_path)
