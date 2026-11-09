@@ -144,9 +144,10 @@ Regeln für Änderungen:
 ## Langzeitbetrieb
 
 Gesammelt wird automatisch von **GitHub Actions** (`.github/workflows/collect.yml`), kein PC muss
-durchlaufen. Jeder Lauf sammelt 2 Stunden lang jede Minute und speichert eine eigene kleine
-Datenbank in `data/raw/`. Jede Stunde wird ein neuer Lauf angestoßen, der wartet, bis der vorige
-fertig ist. Läuft auf dem öffentlichen Repo kostenlos.
+durchlaufen. Jeder Lauf sammelt knapp 6 Stunden lang jede Minute, speichert eine eigene kleine
+Datenbank in `data/raw/` und startet dann selbst den nächsten Lauf. Ein stündlicher Zeitplan
+springt ein, falls die Kette abreißt. Läuft auf dem öffentlichen Repo kostenlos.
+Stoppen: `gh workflow disable collect.yml`, wieder starten: `gh workflow enable collect.yml`.
 
 Auswerten:
 

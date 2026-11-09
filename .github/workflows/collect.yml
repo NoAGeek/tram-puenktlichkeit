@@ -1,11 +1,16 @@
 # Sammelt die Daten auf einem Rechner von GitHub, damit kein PC durchlaufen muss.
 #
-# Jeder Lauf sammelt 2 Stunden lang jede Minute und legt eine eigene kleine
-# Datenbank in data/raw/ ab. Der Zeitplan stößt jede Stunde einen Lauf an.
-# Weil "concurrency" nur einen Lauf gleichzeitig erlaubt, wartet der nächste
-# und startet sofort, wenn der vorige fertig ist. So bleiben die Lücken klein.
+# Jeder Lauf sammelt knapp 6 Stunden lang jede Minute (GitHub erlaubt max. 6 h)
+# und legt eine eigene kleine Datenbank in data/raw/ ab. Am Ende startet jeder
+# Lauf selbst den nächsten. So entsteht eine Kette ohne große Lücken.
+#
+# Der stündliche Zeitplan ist nur die Reserve, falls die Kette einmal abreißt.
+# GitHub führt ihn unzuverlässig aus (oft nur alle 4-7 Stunden), darum reicht
+# er allein nicht. Weil "concurrency" nur einen Lauf gleichzeitig erlaubt,
+# wartet ein zusätzlicher Lauf, bis der vorige fertig ist.
 #
 # Von Hand starten: GitHub -> Actions -> "Daten sammeln" -> "Run workflow".
+# Sammeln stoppen:  gh workflow disable collect.yml  (wieder an: enable)
 
 name: Daten sammeln
 
@@ -16,7 +21,7 @@ on:
     inputs:
       minutes:
         description: "Wie viele Minuten sammeln (zum Testen z. B. 3)"
-        default: "120"
+        default: "340"
 
 concurrency:
   group: collect
@@ -24,11 +29,12 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 358
     env:
       TZ: Europe/Vienna
     steps:
@@ -46,7 +52,7 @@ jobs:
           mkdir -p data/raw
           FILE="data/raw/$(date -u +%Y-%m-%dT%H%MZ).db"
           echo "FILE=$FILE" >> "$GITHUB_ENV"
-          python -m tramcheck collect --minutes "${{ inputs.minutes || 120 }}" --database "$FILE"
+          python -m tramcheck collect --minutes "${{ inputs.minutes || 340 }}" --database "$FILE"
 
       - name: Rohdaten ins Repo speichern
         if: always()
@@ -61,3 +67,10 @@ jobs:
             sleep 10
           done
           exit 1
+
+      # Nicht bei einem abgebrochenen Lauf: so kann man die Kette von Hand stoppen.
+      - name: Nächsten Lauf starten
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run collect.yml --ref main
